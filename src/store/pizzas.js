@@ -53,21 +53,36 @@ export const usePizzasStore = defineStore("pizzas", {
       // Загрузка окончена
       this.isLoading = false;
     },
-  },
-  getters: {
-    filterProduct() {
-      // Сначала мы получаем индекс выбранной категории с помощью findIndex
-      let index = this.categories.findIndex((el) => el.isActive == true);
-      // Если index === 0 то возврощаем массив со всеми товарами
-      if (index === 0) {
-        return this.items;
-      }
-      // Если index != 0, то с помощью filter возвращаем все товары,
-      // у которых значение ключа "category" совпадает с index
-      else {
-        let filteredArray = this.items.filter((el) => el.category === index);
+    getters: {
+      // filterProduct() {
+      //   // Сначала мы получаем индекс выбранной категории с помощью findIndex
+      //   let index = this.categories.findIndex((el) => el.isActive == true);
+      //   // Если index === 0 то возврощаем массив со всеми товарами
+      //   if (index === 0) {
+      //     return this.items;
+      //   }
+      //   // Если index != 0, то с помощью filter возвращаем все товары,
+      //   // у которых значение ключа "category" совпадает с index
+      //   else {
+      //     let filteredArray = this.items.filter((el) => el.category === index);
+      //     return filteredArray;
+      //   }
+      // },
+
+      filterProduct() {
+        // Находим индекс активной категории
+        const activeCategoryIndex = this.categories.findIndex(
+          (el) => el.isActive
+        );
+
+        // Фильтруем товары в зависимости от активной категории
+        const filteredArray =
+          activeCategoryIndex === 0
+            ? this.items
+            : this.items.filter((el) => el.category === activeCategoryIndex);
+
         return filteredArray;
-      }
+      },
     },
   },
 });
