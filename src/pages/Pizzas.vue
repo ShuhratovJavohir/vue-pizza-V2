@@ -7,7 +7,7 @@ import { computed, onMounted } from "vue";
 const pizzasStore = usePizzasStore()
 
 // Через computed получаем все товары и записываем в getProducts
-const getProducts = computed(() => pizzasStore.items)
+const getProducts = computed(() => pizzasStore.filterProduct)
 
 // До загрузка страницы проверяем. Если в 'Global State itmes' что то есть, не делаем запрос на получение товаров
 // Таким оброзом товары будм получать только тогда когда товары ещё не пришли и когда первый раз заходим на сайт
@@ -22,7 +22,8 @@ onMounted(() => {
 
 <template>
   <h2 class="content__title">Все пиццы</h2>
-  <div class="content__items">
+  <div class="content__items" v-if="getProducts">
     <Pizza v-for="product in getProducts" :key="product.id" :product="product" />
   </div>
+  <h2 v-else>Идёт загруска...</h2>
 </template>
