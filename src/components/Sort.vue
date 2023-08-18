@@ -1,4 +1,27 @@
 <script setup>
+import { usePizzasStore } from "@/store/pizzas.js";
+import { computed, ref } from "vue";
+
+// Global State
+const pizzasStore = usePizzasStore();
+
+// Locka State
+const getSort = computed(() => pizzasStore.sort);
+const activeSort = ref("популярности");
+const sortOpen = ref(false);
+
+const openSort = () => {
+  sortOpen.value = !sortOpen.value;
+};
+
+const onClickSort = (item) => {
+  getSort.value.forEach((el) => {
+    el.isActive = false;
+  });
+  item.isActive = true;
+  activeSort.value = item.name;
+  sortOpen.value = false
+};
 </script>
 
 <template>
@@ -17,13 +40,18 @@
         />
       </svg>
       <b>Сортировка по:</b>
-      <span>популярности</span>
+      <span  @click="openSort">{{ activeSort }}</span>
     </div>
-    <div class="sort__popup">
+    <div class="sort__popup" v-show="sortOpen">
       <ul>
-        <li class="active">популярности</li>
-        <li>цене</li>
-        <li>алфавиту</li>
+        <li
+          :class="item.isActive == true ? 'active' : ''"
+          v-for="item in getSort"
+          :key="item.id"
+          @click="onClickSort(item)"
+        >
+          {{ item.name }}
+        </li>
       </ul>
     </div>
   </div>

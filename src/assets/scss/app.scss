@@ -2,7 +2,9 @@
 @import "libs/normalize";
 @import "components/all";
 
-
+*{
+  user-select: none;
+}
 
 body {
   background-color: $background;
