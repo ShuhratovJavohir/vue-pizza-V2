@@ -9,9 +9,18 @@ import Sort from "@/components/Sort.vue";
 // Global State
 const pizzasStore = usePizzasStore();
 
+const activeCategory = computed(() => {
+  pizzasStore.categories.forEach(el => {
+    if(el.isActive){
+      categoriesName.value = el.name
+    }
+  })
+});
+
 // Lokal State
 const productInPages = ref(4);
 const activePage = ref(1);
+const categoriesName = ref('Все')
 
 const totalPage = computed(() =>
   Math.ceil(getProducts.value.length / productInPages.value)
@@ -46,7 +55,7 @@ onMounted(() => {
     <Categories />
     <Sort />
   </div>
-  <h2 class="content__title">Все пиццы</h2>
+  <h2 class="content__title">{{ categoriesName }} пиццы</h2>
   <div class="content__items" v-if="pizzasStore.isLoading == false">
     <Pizza
       v-for="product in paginatedProducts"

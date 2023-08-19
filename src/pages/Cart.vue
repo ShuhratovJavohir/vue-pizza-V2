@@ -2,20 +2,36 @@
 import { usePizzasStore } from "../store/pizzas";
 import { computed } from "vue";
 import { useCartStore } from "@/store/cart";
+
+// Global State
 const cartStore = useCartStore();
 const pizzasStore = usePizzasStore();
 
+// Для добовления товара
 const onClickAdd = (item) => {
   pizzasStore.addCart(item);
 };
+
+// Для удоления товара
 const onClickDel = (item) => {
   pizzasStore.delCart(item);
+  if (item.amount === 0) {
+    cartStore.delInCart(item);
+  }
 };
 
+// Для полностью удоления товара из корзины
+const delItem = (item) => {
+  item.amount = 0
+  cartStore.delInCart(item)
+};
+
+// Для удоления всех товаров из корзины
 const onClickDelAll = () => {
   cartStore.delAll();
 };
 
+// Для получения товаров из корзины
 const getProduct = computed(() => cartStore.cart);
 </script>
 
@@ -93,8 +109,8 @@ const getProduct = computed(() => cartStore.cart);
               <img src="@/assets/img/icon/plus-icon.svg" alt="plus" />
             </div>
           </div>
-          <h2 class="cart__product-totalPrice">770 ₽</h2>
-          <div class="cart__product-del">
+          <h2 class="cart__product-totalPrice">{{product.totalPrice}} ₽</h2>
+          <div @click="delItem(product)" class="cart__product-del">
             <img src="@/assets/img/icon/del-icon.svg" alt="del" />
           </div>
         </div>
@@ -103,7 +119,7 @@ const getProduct = computed(() => cartStore.cart);
     <div class="cart__bottom">
       <div class="cart__bottom-left">
         <h2>
-          Всего пицц: <span>{{ getProduct.length }} шт.</span>
+          Всего пицц: <span>{{ cartStore.totalAmount }} шт.</span>
         </h2>
         <div class="btn">
           <router-link to="/" class="router">
@@ -127,7 +143,7 @@ const getProduct = computed(() => cartStore.cart);
         </div>
       </div>
       <div class="cart__bottom-right">
-        <h2>Сумма заказа: <span>900 ₽</span></h2>
+        <h2>Сумма заказа: <span>{{cartStore.totalPrice}} ₽</span></h2>
         <button>Оплатить сейчас</button>
       </div>
     </div>
@@ -138,14 +154,12 @@ const getProduct = computed(() => cartStore.cart);
       <img src="@/assets/img/emoji.png" alt="" />
     </div>
     <p class="not-cart-subtitle">
-      Вероятней всего, вы не заказывали ещё пиццу.<br> Для того, чтобы заказать
-      пиццу, перейди на главную страницу.
+      Вероятней всего, вы не заказывали ещё пиццу.<br />
+      Для того, чтобы заказать пиццу, перейди на главную страницу.
     </p>
-    <img src="@/assets/img/not-cart-img.png" alt="" class="not-cart-img">
+    <img src="@/assets/img/not-cart-img.png" alt="" class="not-cart-img" />
     <div class="not-cart-btn">
-      <router-link to="/" class="not-cart-link">
-        Вернуться назад
-      </router-link>
+      <router-link to="/" class="not-cart-link"> Вернуться назад </router-link>
     </div>
   </div>
 </template>

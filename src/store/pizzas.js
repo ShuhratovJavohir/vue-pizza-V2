@@ -69,6 +69,7 @@ export const usePizzasStore = defineStore("pizzas", {
         let result = await res.json();
         result.forEach(obj => {
           obj.amount = 0
+          obj.totalPrice = 0
         })
 
         this.items = result
@@ -80,10 +81,12 @@ export const usePizzasStore = defineStore("pizzas", {
     addCart(item) {
       let index = this.items.findIndex(el => el.id === item.id)
       this.items[index].amount++
+      item.totalPrice = item.amount * item.price
     },
     delCart(item) {
       let index = this.items.findIndex(el => el.id === item.id)
       this.items[index].amount--
+      item.totalPrice = item.amount * item.price
     }
   },
   getters: {

@@ -70,7 +70,7 @@ const pizzaType = [
           />
         </svg>
         <span>Добавить</span>
-        <i>2</i>
+        <i>{{product.amount}}</i>
       </div>
     </div>
   </div>

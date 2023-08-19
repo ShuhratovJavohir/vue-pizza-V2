@@ -22,6 +22,18 @@ export const useCartStore = defineStore('cart', {
         el.amount = 0
       })
       this.cart = [] 
+    },
+    delInCart(item){
+      let delItem = this.cart.findIndex(el => el.id === item.id)
+      this.cart.splice(delItem, 1)
+    }
+  },
+  getters: {
+    totalAmount(){
+      return this.cart.reduce((sum, el) => sum + el.amount, 0)
+    },
+    totalPrice(){
+      return this.cart.reduce((sum, el) => sum + el.totalPrice, 0)
     }
   }
 })
