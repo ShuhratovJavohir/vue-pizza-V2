@@ -7,12 +7,13 @@ import Skeleton from "@/components/Skeleton.vue";
 // Global State
 const pizzasStore = usePizzasStore();
 
-
 // Lokal State
-const productInPages = ref(4)
-const activePage = ref(1)
+const productInPages = ref(4);
+const activePage = ref(1);
 
-const totalPage = computed(() => Math.ceil(getProducts.value.length / productInPages.value))
+const totalPage = computed(() =>
+  Math.ceil(getProducts.value.length / productInPages.value)
+);
 
 const paginatedProducts = computed(() => {
   const from = (activePage.value - 1) * productInPages.value; // Вычисляем начальный индекс для текущей страницы.
@@ -31,9 +32,7 @@ const getProducts = computed(() => pizzasStore.filterProduct);
 // Таким оброзом товары будм получать только тогда когда товары ещё не пришли и когда первый раз заходим на сайт
 onMounted(() => {
   if (!pizzasStore.items.length) {
-    setTimeout(() => {
-      pizzasStore.fetchProducts();
-    }, 1000);
+    pizzasStore.fetchProducts();
   } else {
     console.log("уже есть");
   }
@@ -50,9 +49,17 @@ onMounted(() => {
     />
   </div>
   <div class="content__items" v-else>
-    <Skeleton v-for="item in 10" :key="item" />
+    <Skeleton v-for="item in 4" :key="item" />
   </div>
   <div class="paggination">
-    <div class="page" :class="activePage == page ? 'active' : ''" @click="pageClick(page)" v-for="(page, index) in totalPage" :key="index">{{page}}</div>
+    <div
+      class="page"
+      :class="activePage == page ? 'active' : ''"
+      @click="pageClick(page)"
+      v-for="(page, index) in totalPage"
+      :key="index"
+    >
+      {{ page }}
+    </div>
   </div>
 </template>
