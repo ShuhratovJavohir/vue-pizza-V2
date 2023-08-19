@@ -1,0 +1,263 @@
+.cart {
+  max-width: 851px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 15px;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #F4F4F4;
+    ;
+
+    &-right {
+      h2 {
+        color: #000;
+        font-size: 32px;
+        font-weight: 700;
+      }
+    }
+
+    &-left {
+      cursor: pointer;
+
+      h2 {
+        color: #B6B6B6;
+        font-size: 16px;
+        font-weight: 400;
+        transition: all .2s ease-in-out;
+      }
+
+      svg {
+        path {
+          transition: all .2s ease-in-out;
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            stroke: red
+          }
+        }
+
+        h2 {
+          color: red;
+        }
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+
+      &:nth-child(1) {
+        gap: 15px;
+      }
+
+      &:nth-child(2) {
+        gap: 7px;
+      }
+    }
+  }
+
+  &__product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+    border-bottom: 1px solid #F4F4F4;
+
+    &-img {
+      width: 80px;
+      height: 80px;
+    }
+
+    &-left,
+    &-right {
+      display: flex;
+      align-items: center;
+    }
+
+    &-left {
+      gap: 15px;
+    }
+
+    &-right {
+      gap: 93px;
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        color: #000;
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      p {
+        color: #8D8D8D;
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
+
+    &-amount {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      div {
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        border: 1px solid #FE5F1E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      span {
+        color: #000;
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+
+    &-del {
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #D0D0D0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+  }
+
+  &__bottom {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      h2 {
+        color: #000;
+        font-size: 22px;
+        font-weight: 400;
+
+        span {
+          color: #000;
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+
+      .btn {
+        width: 211px;
+        height: 55px;
+        border-radius: 30px;
+        border: 1px solid #D3D3D3;
+        background: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .router {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        span {}
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      h2 {
+        color: #000;
+        font-size: 22px;
+        font-weight: 400;
+
+        span {
+          color: #FE5F1E;
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+
+      button {
+        width: 211px;
+        height: 55px;
+        border-radius: 30px;
+        background: #FE5F1E;
+        border: none;
+        outline: none;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.not-cart {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__top {
+    display: flex;
+    gap: 10px;
+
+    h2 {
+      color: #000;
+      font-size: 32px;
+      font-weight: 700;
+    }
+  }
+
+  &-subtitle {
+    margin-top: 10px;
+    width: 547px;
+    color: #777;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  &-img {
+    margin-top: 47px;
+    width: 300px;
+    height: 255px;
+  }
+
+  &-btn {
+    margin-top: 74px;
+    width: 210px;
+    height: 46px;
+    border-radius: 30px;
+    background: #282828;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  &-link{
+    color: #fff;
+  }
+}

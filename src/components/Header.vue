@@ -5,15 +5,15 @@
 <template>
       <div class="header">
         <div class="container">
-          <div class="header__logo">
+          <router-link to="/" class="header__logo">
             <img width="38" src="@/assets/img/pizza-logo.svg" alt="Pizza logo" />
             <div>
               <h1>Vue Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>
             </div>
-          </div>
+          </router-link>
           <div class="header__cart">
-            <a href="/cart.html" class="button button--cart">
+            <router-link to="/cart" class="button button--cart">
               <span>520 ₽</span>
               <div class="button__delimiter"></div>
               <svg
@@ -46,7 +46,7 @@
                 />
               </svg>
               <span>3</span>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>

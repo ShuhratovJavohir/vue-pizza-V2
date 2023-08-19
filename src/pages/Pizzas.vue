@@ -3,6 +3,8 @@ import Pizza from "@/components/Pizza.vue";
 import { usePizzasStore } from "@/store/pizzas.js";
 import { computed, onMounted, ref } from "vue";
 import Skeleton from "@/components/Skeleton.vue";
+import Categories from "@/components/Categories.vue";
+import Sort from "@/components/Sort.vue";
 
 // Global State
 const pizzasStore = usePizzasStore();
@@ -40,8 +42,12 @@ onMounted(() => {
 </script>
 
 <template>
+  <div class="content__top">
+    <Categories />
+    <Sort />
+  </div>
   <h2 class="content__title">Все пиццы</h2>
-  <div class="content__items" v-if="!pizzasStore.isLoading">
+  <div class="content__items" v-if="pizzasStore.isLoading == false">
     <Pizza
       v-for="product in paginatedProducts"
       :key="product.id"

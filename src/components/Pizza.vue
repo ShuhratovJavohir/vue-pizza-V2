@@ -1,4 +1,15 @@
 <script setup>
+import { useCartStore } from "@/store/cart";
+import {usePizzasStore} from '@/store/pizzas.js'
+
+const cartStore = useCartStore();
+const pizzasStore = usePizzasStore()
+
+const onClickAdd = (item) => {
+  pizzasStore.addCart(item)
+  cartStore.addToCart(item);
+};
+
 const props = defineProps({
   product: { typeof: Object },
 });
@@ -22,19 +33,30 @@ const pizzaType = [
     <h4 class="pizza-block__title">{{ product.title }}</h4>
     <div class="pizza-block__selector">
       <ul>
-        <li :class="index === 0 ? 'active' : ''" v-for="(item, index) in product.types" :key="index">
+        <li
+          :class="index === 0 ? 'active' : ''"
+          v-for="(item, index) in product.types"
+          :key="index"
+        >
           {{ pizzaType[item].name }}
         </li>
       </ul>
       <ul>
-        <li :class="index === 0 ? 'active' : ''" v-for="(size, index) in product.sizes" :key="index">
+        <li
+          :class="index === 0 ? 'active' : ''"
+          v-for="(size, index) in product.sizes"
+          :key="index"
+        >
           {{ size }} см.
         </li>
       </ul>
     </div>
     <div class="pizza-block__bottom">
       <div class="pizza-block__price">от {{ product.price }} ₽</div>
-      <div class="button button--outline button--add">
+      <div
+        @click="onClickAdd(product)"
+        class="button button--outline button--add"
+      >
         <svg
           width="12"
           height="12"

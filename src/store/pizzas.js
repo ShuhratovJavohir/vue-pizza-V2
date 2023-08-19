@@ -1,11 +1,12 @@
-import { defineStore } from "pinia";
+import {
+  defineStore
+} from "pinia";
 
 export const usePizzasStore = defineStore("pizzas", {
   state: () => ({
     items: [],
     isLoading: true,
-    categories: [
-      {
+    categories: [{
         id: 0,
         name: "Все",
         isActive: true,
@@ -36,8 +37,7 @@ export const usePizzasStore = defineStore("pizzas", {
         isActive: false,
       },
     ],
-    sort: [
-      {
+    sort: [{
         id: 1,
         name: "популярности",
         isActive: true,
@@ -66,12 +66,25 @@ export const usePizzasStore = defineStore("pizzas", {
 
       // Если всё ок то меняем состояние в state "items: null" на то что мы получаем
       if (res.ok) {
-        this.items = await res.json();
+        let result = await res.json();
+        result.forEach(obj => {
+          obj.amount = 0
+        })
+
+        this.items = result
       }
 
       // Загрузка окончена
       this.isLoading = false;
     },
+    addCart(item) {
+      let index = this.items.findIndex(el => el.id === item.id)
+      this.items[index].amount++
+    },
+    delCart(item) {
+      let index = this.items.findIndex(el => el.id === item.id)
+      this.items[index].amount--
+    }
   },
   getters: {
     filterProduct() {
