@@ -94,8 +94,7 @@ export const usePizzasStore = defineStore("pizzas", {
         // Выбор соответствующей функции сортировки или пустой функции
         const selectedSortFunction = sortFunctions[indexSort] || ((a, b) => 0);
 
-        // Создание копии массива товаров, сортировка и возврат
-        return this.items.slice().sort(selectedSortFunction);
+        return this.items.sort(selectedSortFunction);
       } else {
         // Фильтрация товаров по выбранной категории
         const filteredArray = this.items.filter(
@@ -109,39 +108,5 @@ export const usePizzasStore = defineStore("pizzas", {
         return filteredArray.sort(selectedSortFunction);
       }
     },
-
-    // filterProduct() {
-    //   // Сначала мы получаем индекс выбранной категории с помощью findIndex
-    //   let indexCategoriy = this.categories.findIndex(
-    //     (el) => el.isActive == true
-    //   );
-    //   // Также получаем index сортировки с помощью findIndex
-    //   let indexSort = this.sort.findIndex((el) => el.isActive == true);
-    //   // Если index === 0 то возврощаем массив со всеми товарами
-    //   if (indexCategoriy === 0) {
-    //     if (indexSort == 0) {
-    //       return this.items.sort((a, b) => a.rating - b.rating);
-    //     } else if (indexSort == 1) {
-    //       return this.items.sort((a, b) => a.price - b.price);
-    //     } else if (indexSort == 2) {
-    //       return this.items.sort((a, b) => a.title.localeCompare(b.title));
-    //     }
-    //     return this.items;
-    //   }
-    //   // Если index != 0, то с помощью filter возвращаем все товары,
-    //   // у которых значение ключа "category" совпадает с index
-    //   else {
-    //     let filteredArray = this.items.filter(
-    //       (el) => el.category === indexCategoriy
-    //     );
-    //     if(indexSort == 0){
-    //       return filteredArray.sort((a, b) => a.rating - b.rating)
-    //     }else if(indexSort == 1){
-    //       return filteredArray.sort((a, b) => a.price - b.price)
-    //     }else if(indexSort == 2){
-    //       return filteredArray.sort((a, b) => a.title.localeCompare(b.title))
-    //     }
-    //   }
-    // },
   },
 });
