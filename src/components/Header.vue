@@ -1,7 +1,9 @@
 <script setup>
 import { useCartStore } from "@/store/cart.js";
+import {usePizzasStore} from '@/store/pizzas.js'
 
 const cartStore = useCartStore()
+const pizzasStore = usePizzasStore()
 </script>
 
 <template>
@@ -14,6 +16,10 @@ const cartStore = useCartStore()
           <p>самая вкусная пицца во вселенной</p>
         </div>
       </router-link>
+      <div class="header-search">
+        <img src="@/assets/img/search.svg" alt="">
+        <input v-model="pizzasStore.search" type="text" placeholder="Поиск пиццы...">
+      </div>
       <div class="header__cart">
         <router-link to="/cart" class="button button--cart">
           <span>{{cartStore.totalPrice}} ₽</span>

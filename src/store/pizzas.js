@@ -6,6 +6,7 @@ export const usePizzasStore = defineStore("pizzas", {
   state: () => ({
     items: [],
     isLoading: true,
+    search: '',
     categories: [{
         id: 0,
         name: "Все",

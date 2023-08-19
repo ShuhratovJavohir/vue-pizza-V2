@@ -10,17 +10,17 @@ import Sort from "@/components/Sort.vue";
 const pizzasStore = usePizzasStore();
 
 const activeCategory = computed(() => {
-  pizzasStore.categories.forEach(el => {
-    if(el.isActive){
-      categoriesName.value = el.name
+  pizzasStore.categories.forEach((el) => {
+    if (el.isActive) {
+      categoriesName.value = el.name;
     }
-  })
+  });
 });
 
 // Lokal State
 const productInPages = ref(4);
 const activePage = ref(1);
-const categoriesName = ref('Все')
+const categoriesName = ref("Все");
 
 const totalPage = computed(() =>
   Math.ceil(getProducts.value.length / productInPages.value)
@@ -37,7 +37,16 @@ function pageClick(page) {
 }
 
 // Через computed получаем все товары и записываем в getProducts
-const getProducts = computed(() => pizzasStore.filterProduct);
+const getProducts = computed(() => {
+  // if (pizzasStore.search.length == 0) {
+    return pizzasStore.filterProduct;
+  // } else {
+  // return pizzasStore.filterProduct.filter((el) => {
+  //   el.title.includes(pizzasStore.search);
+  // });
+  // }
+});
+
 
 // До загрузка страницы проверяем. Если в 'Global State itmes' что то есть, не делаем запрос на получение товаров
 // Таким оброзом товары будм получать только тогда когда товары ещё не пришли и когда первый раз заходим на сайт
@@ -55,7 +64,10 @@ onMounted(() => {
     <Categories />
     <Sort />
   </div>
-  <h2 class="content__title">{{ categoriesName }} пиццы</h2>
+  <h2 v-if="pizzasStore.search.length == 0" class="content__title">
+    {{ categoriesName }} пиццы
+  </h2>
+  <h2 v-else class="content__title">Поиск пиццы: {{ pizzasStore.search }}</h2>
   <div class="content__items" v-if="pizzasStore.isLoading == false">
     <Pizza
       v-for="product in paginatedProducts"
