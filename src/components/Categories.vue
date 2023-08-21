@@ -10,13 +10,9 @@ const getCategories = computed(() => pizzasStore.categories);
 
 // Methods
 const onClickCategories = (item) => {
-  getCategories.value.forEach((el) => {
-    el.isActive = false;     
-  });
-  item.isActive = true
+  pizzasStore.activeCategoriy(item)
 };
-</script>
-
+</script>  
 
 <template>
   <div class="categories">

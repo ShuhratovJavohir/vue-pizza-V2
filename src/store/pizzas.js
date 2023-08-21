@@ -1,13 +1,13 @@
-import {
-  defineStore
-} from "pinia";
+import { defineStore } from "pinia";
 
 export const usePizzasStore = defineStore("pizzas", {
   state: () => ({
     items: [],
     isLoading: true,
-    search: '',
-    categories: [{
+    search: "",
+    activeCategoriyName: 'Все',
+    categories: [
+      {
         id: 0,
         name: "Все",
         isActive: true,
@@ -38,7 +38,8 @@ export const usePizzasStore = defineStore("pizzas", {
         isActive: false,
       },
     ],
-    sort: [{
+    sort: [
+      {
         id: 1,
         name: "популярности",
         isActive: true,
@@ -56,6 +57,14 @@ export const usePizzasStore = defineStore("pizzas", {
     ],
   }),
   actions: {
+    activeCategoriy(item) {
+      this.categories.forEach((el) => {
+        el.isActive = false;
+      });
+      item.isActive = true
+      this.activeCategoriyName = item.name
+    },
+
     async fetchProducts() {
       // Идёт загрузка
       this.isLoading = true;
@@ -68,27 +77,27 @@ export const usePizzasStore = defineStore("pizzas", {
       // Если всё ок то меняем состояние в state "items: null" на то что мы получаем
       if (res.ok) {
         let result = await res.json();
-        result.forEach(obj => {
-          obj.amount = 0
-          obj.totalPrice = 0
-        })
+        result.forEach((obj) => {
+          obj.amount = 0;
+          obj.totalPrice = 0;
+        });
 
-        this.items = result
+        this.items = result;
       }
 
       // Загрузка окончена
       this.isLoading = false;
     },
     addCart(item) {
-      let index = this.items.findIndex(el => el.id === item.id)
-      this.items[index].amount++
-      item.totalPrice = item.amount * item.price
+      let index = this.items.findIndex((el) => el.id === item.id);
+      this.items[index].amount++;
+      item.totalPrice = item.amount * item.price;
     },
     delCart(item) {
-      let index = this.items.findIndex(el => el.id === item.id)
-      this.items[index].amount--
-      item.totalPrice = item.amount * item.price
-    }
+      let index = this.items.findIndex((el) => el.id === item.id);
+      this.items[index].amount--;
+      item.totalPrice = item.amount * item.price;
+    },
   },
   getters: {
     filterProduct() {

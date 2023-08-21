@@ -9,18 +9,11 @@ import Sort from "@/components/Sort.vue";
 // Global State
 const pizzasStore = usePizzasStore();
 
-const activeCategory = computed(() => {
-  pizzasStore.categories.forEach((el) => {
-    if (el.isActive) {
-      categoriesName.value = el.name;
-    }
-  });
-});
+const categoriesName = ref("Все");
 
 // Lokal State
 const productInPages = ref(4);
 const activePage = ref(1);
-const categoriesName = ref("Все");
 
 const totalPage = computed(() =>
   Math.ceil(getProducts.value.length / productInPages.value)
@@ -65,7 +58,8 @@ onMounted(() => {
     <Sort />
   </div>
   <h2 v-if="pizzasStore.search.length == 0" class="content__title">
-    {{ categoriesName }} пиццы
+    {{ pizzasStore?.activeCategoriyName }} 
+    {{ pizzasStore?.activeCategoriyName === 'Все' ? 'пиццы' : ''}}
   </h2>
   <h2 v-else class="content__title">Поиск пиццы: {{ pizzasStore.search }}</h2>
   <div class="content__items" v-if="pizzasStore.isLoading == false">
