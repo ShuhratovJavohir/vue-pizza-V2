@@ -60,3 +60,8 @@ const pizzasStore = usePizzasStore()
   </div>
 </template>
 
+
+<style>
+
+</style>
+

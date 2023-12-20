@@ -1,23 +1,22 @@
-@import "../variables";
+@import '../variables';
 
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
 
-  &-search {
+  &-search{
     display: flex;
     align-items: center;
     gap: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    font-size: 16px;
-    padding: 12px 20px 12px 20px;
+    border: 1px solid #a19f9f;
+    padding: 10px 25px;
+    width: 300px;
+    border-radius: 5px;
 
-    input {
-      width: 300px;
+
+    > input{
       border: none;
-      outline: none;
-      font-size: 16px;
+      width: 100%;
     }
   }
 
@@ -25,6 +24,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 645px) {
+      flex-direction: column;
+
+      .header__cart {
+        margin-top: 20px;
+      }
+    }
   }
 
   &__logo {
